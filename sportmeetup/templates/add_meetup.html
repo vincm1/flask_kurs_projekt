@@ -1,0 +1,21 @@
+{% extends "base.html" %} 
+{% block content %} 
+    <h1>Add Meetups</h1>
+    <div class="container">
+        <form method="POST">
+            {{ form.hidden_tag() }}
+            {{form.event_date.label}}{{form.event_date}}
+            <br>
+            {{form.sport.label}}{{form.sport}}
+            <br>
+            {{form.place.label}}{{form.place}}
+            <br>
+            {{form.adress.label}}{{form.adress}}
+            <br>
+            {{form.description.label}}{{form.description}}
+            <br>
+            {{form.submit}}
+
+        </form>
+    </div>
+{% endblock %}

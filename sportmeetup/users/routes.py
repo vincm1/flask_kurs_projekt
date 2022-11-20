@@ -22,7 +22,7 @@ def register_user():
             email = form.email.data,
             passwort = form.passwort.data)
         flash('Anmeldung erfolgreich!')
-        return redirect(url_for('core.landing'))
+        return redirect(url_for('users.account'))
     
     return render_template('anmeldung.html', form=form)
 
@@ -37,10 +37,10 @@ def do_login_user():
         
         if not user or not user.check_passwort(form.passwort.data):
             flash('Falsche Anmeldedaten!')
-            redirect(url_for('users.do_login_user'))
+            redirect(url_for('users.account'))
         
         login_user(user)
-        return redirect(url_for('core.landing'))
+        return redirect(url_for('users.account'))
 
     return render_template('login.html', form=form)
 
@@ -48,36 +48,36 @@ def do_login_user():
 @login_required
 def logout():
     logout_user()
-    return redirect(url_for('core.index'))
+    return redirect(url_for('core.landing'))
 
-@users.route('/account', methods=["GET","POST"])
-@login_required
-def edit_profile():
+# @users.route('/account', methods=["GET","POST"])
+# @login_required
+# def edit_profile():
 
-    form = EditProfileForm()
+#     form = EditProfileForm()
 
-    if form.validate_on_submit():
-        print(form)
-        #if form.picture.data:
-        username = current_user.username
-        print(username)
-        print(form.picture.data)
-        pic = add_profile_pic(form.picture.data,username)
-        current_user.profile_picture = pic
-        print(current_user.profile_picture)
+#     if form.validate_on_submit():
+#         print(form)
+#         if form.picture.data:
+#         username = current_user.username
+#         print(username)
+#         print(form.picture.data)
+#         pic = add_profile_pic(form.picture.data,username)
+#         current_user.profile_picture = pic
+#         print(current_user.profile_picture)
         
-        current_user.username = form.user.data
-        current_user.email = form.email.data
+#         current_user.username = form.user.data
+#         current_user.email = form.email.data
 
-        db.session.commit()
+#         db.session.commit()
 
-        flash('Profil erfolgreich bearbeitet!')
+#         flash('Profil erfolgreich bearbeitet!')
 
-    elif request.method == 'GET':
-        form.user.data = current_user.username
-        form.email.data = current_user.user_email
+#     elif request.method == 'GET':
+#         form.user.data = current_user.username
+#         form.email.data = current_user.user_email
     
-    profile_picture = url_for('static', filename='profile_pics/'+ str(current_user.profile_picture))
-    return render_template('profile.html', form=form, profile_picture=profile_picture)
+#     profile_picture = url_for('static', filename='profile_pics/'+ str(current_user.profile_picture))
+#     return render_template('profile.html', form=form, profile_picture=profile_picture)
 
 

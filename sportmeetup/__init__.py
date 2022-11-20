@@ -28,4 +28,10 @@ def create_app(config_type): #dev, test, prod
     from sportmeetup.users.routes import users
     app.register_blueprint(users)
 
+    from sportmeetup.error.handler import error_pages
+    app.register_blueprint(error_pages)
+
+    from sportmeetup.meetups.routes import meetups
+    app.register_blueprint(meetups)
+
     return app
