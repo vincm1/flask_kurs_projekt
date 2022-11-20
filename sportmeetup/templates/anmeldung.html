@@ -5,34 +5,28 @@
 <body class="text-center">  
     
     <main class="form-signin w-100 m-auto">
-    <form>
+    <form method="POST  ">
         <img class="mb-4" src="static\logo.jpg" alt="" width="72" height="57">
         <h1 class="h3 mb-3 fw-normal">Registrierung</h1>
         {{ form.hidden_tag() }}
         <div class="form-floating">
         <p>Email</p>
-        {{form.email(type="email", class_="form-control", id="floatingInput", placeholder="name@example.com")}}
+        {{form.email()}}
         </div>
 
         <div class="form-floating">
             <p>Nutzername</p>
-            {{form.username(type="user", class_="form-control", id="floatingInput", label="maxmuster")}}
+            {{form.user()}}
         </div>
 
         <div class="form-floating">
         <p>Passwort</p>
-        {{form.passwort(type="passwort", class_="form-control", id="floatingInput", label="maxmuster")}}
+        {{form.passwort()}}
         </div>
 
         <div class="form-floating">
             <p>Passwort bestätigen</p>
-        {{form.confirm_pw(type="confirm_pw", class_="form-control", id="floatingInput", label="maxmuster")}}
-        </div>
-
-        <div class="checkbox mb-3">
-        <label>
-            <input type="checkbox" value="remember-me"> Remember me
-        </label>
+        {{form.confirm_pw()}}
         </div>
 
         <button class="w-100 btn btn-lg btn-primary" type="submit">Mitglied werden</button>

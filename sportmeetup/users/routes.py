@@ -11,6 +11,21 @@ users = Blueprint('users', __name__)
 def load_user(user_id):
     return User.query.get(user_id)
 
+@users.route('/anmeldung', methods=["GET", "POST"])
+def register_user():
+
+    form = RegistrationForm()
+
+    if form.validate_on_submit():
+        User.create_user(
+            username = form.username.data,
+            email = form.email.data,
+            passwort = form.passwort.data)
+        flash('Anmeldung erfolgreich!')
+        return redirect(url_for('core.landing'))
+    
+    return render_template('anmeldung.html', form=form)
+
 @users.route('/login', methods=["GET", "POST"])
 def do_login_user():
 
@@ -34,21 +49,6 @@ def do_login_user():
 def logout():
     logout_user()
     return redirect(url_for('core.index'))
-
-@users.route('/anmeldung', methods=["GET", "POST"])
-def register_user():
-
-    form = RegistrationForm()
-
-    if form.validate_on_submit():
-        User.create_user(
-            username = form.username.data,
-            email = form.email.data,
-            passwort = form.passwort.data)
-        flash('Anmeldung erfolgreich!')
-        #return redirect(url_for('users.do_login_user'))
-    
-    return render_template('anmeldung.html', form=form)
 
 @users.route('/account', methods=["GET","POST"])
 @login_required
