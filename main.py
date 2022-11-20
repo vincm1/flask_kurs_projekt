@@ -1,5 +1,6 @@
 from sportmeetup import create_app, db
 from sportmeetup.users.models import User
+from sportmeetup.meetups.models import Meetup
 
 if __name__ == '__main__':
     flask_app = create_app('dev')
